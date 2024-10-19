@@ -68,6 +68,12 @@ export const updateMember = async (req: Request, res: Response, next: NextFuncti
 
 export const deleteMember = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    const children = await Member.find({ parents: req.params.memberId });
+
+    if (children.length > 0) {
+      return next(errorHandler(403, 'Cannot delete member because he/she is a parent.'));
+    }
+
     const deletedMember = await Member.findByIdAndDelete(req.params.memberId);
 
     if (!deletedMember) {
