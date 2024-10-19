@@ -14,7 +14,7 @@ const MemberSchema = new mongoose.Schema(
     },
     parents: [
       {
-        type: mongoose.Schema.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Member',
         default: [],
       },

@@ -4,7 +4,8 @@ import Member from '../models/member.model';
 
 export const getMembers = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const members: any = await Member.find().sort({ age: -1 });
+    const members = await Member.find().sort({ age: -1 }).populate('parents');
+
     res.status(200).json(members);
   } catch (err) {
     next(err);
