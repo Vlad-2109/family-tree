@@ -7,8 +7,6 @@ import memberRoutes from './routes/member.route';
 
 dotenv.config();
 
-const utl = 1;
-
 const mongo_uri = process.env.MONGO_URI || '';
 const port = process.env.PORT || 3000;
 
@@ -22,7 +20,7 @@ mongoose
   .catch((err) => console.log('DB error', err));
 
 app.use(express.json());
-app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
+app.use(cors({ credentials: true, origin: ['http://localhost:5173', 'https://family-tree-rho-seven.vercel.app'] }));
 
 app.use('/api/member', memberRoutes);
 
