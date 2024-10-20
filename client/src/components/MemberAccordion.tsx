@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { IMember, MemberAccordionProps } from '../types/types';
+import { useAppSelector } from '../redux/hook';
+import { IMember } from '../types/types';
 
-export const MemberAccordion: React.FC<MemberAccordionProps> = ({ members }) => {
+export const MemberAccordion: React.FC = () => {
+
+  const members:IMember[] = useAppSelector((state) => state.member.members);
+
   const [tree, setTree] = useState<IMember | null>(null);
 
   useEffect(() => {

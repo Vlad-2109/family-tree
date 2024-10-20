@@ -6,7 +6,6 @@ import {
   IUpdateMember,
 } from '../types/types';
 
-// import { ICreatePost, ICreatePostResponse, IGetPosts, IUpdatePost, IUpdatePostResponse } from '../types/types';
 
 export const MemberService = {
   async getAllMembers(): Promise<IGetMember[]> {

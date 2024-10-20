@@ -9,8 +9,9 @@ import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import DialogTitle from '@mui/material/DialogTitle';
-import { AddMemberButtonsProps } from '../types/types';
 import { MemberService } from '../services/member.service';
+import { useAppSelector } from '../redux/hook';
+import { IMember } from '../types/types';
 
 const MenuProps = {
   PaperProps: {
@@ -20,9 +21,9 @@ const MenuProps = {
   },
 };
 
-export const AddMemberButton: React.FC<AddMemberButtonsProps> = ({
-  members,
-}) => {
+export const AddMemberButton: React.FC = () => {
+  const members: IMember[] = useAppSelector((state) => state.member.members);
+
   const [open, setOpen] = useState<boolean>(false);
   const [name, setName] = useState<string>('');
   const [age, setAge] = useState<number>(0);
@@ -38,7 +39,7 @@ export const AddMemberButton: React.FC<AddMemberButtonsProps> = ({
       setOpen(false);
       resetForm();
     } catch (err: any) {
-      toast.error(err.response.data.message);
+      toast.error(err.response.data.message || 'Something went wrong');
     }
   };
 

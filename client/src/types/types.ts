@@ -28,23 +28,3 @@ export interface IMember {
   updatedAt: Date;
   __v: 0;
 }
-
-export interface MemberAccordionProps {
-  members: IMember[];
-}
-
-export interface AddMemberButtonsProps {
-  members: IMember[];
-}
-
-export interface UpdateMemberButtonProps {
-  members: IMember[];
-}
-
-export interface DeleteMemberButtonProps {
-  members: IMember[];
-}
-
-export interface ButtonsBarProps {
-  members: IMember[];
-}

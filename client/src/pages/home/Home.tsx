@@ -1,27 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { ButtonsBar } from '../../components/ButtonsBar';
-import { IMember } from '../../types/types';
-import { MemberService } from '../../services/member.service';
 import { MemberAccordion } from '../../components/MemberAccordion';
+import { useAppDispatch } from '../../redux/hook';
+import { getMembers } from '../../redux/memberSlice';
 
 export const Home: React.FC = () => {
-  const [members, setMembers] = useState<IMember[]>([]);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const fetchMembers = async () => {
-      try {
-        const data = await MemberService.getAllMembers();
-        if (data) {
-          setMembers(data);
-        }
-      } catch (error) {
-        //помилку вивести нормально
-        console.log(error);
-      }
-    };
-
-    fetchMembers();
-  }, []);
+    dispatch(getMembers());
+  }, [dispatch]);
 
   return (
     <>
@@ -36,8 +24,8 @@ export const Home: React.FC = () => {
             alt="family-tree"
           />
         </div>
-        <ButtonsBar members={members} />
-        <MemberAccordion members={members} />
+        <ButtonsBar />
+        <MemberAccordion />
       </div>
     </>
   );

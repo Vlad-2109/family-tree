@@ -6,10 +6,10 @@ import { useAppDispatch, useAppSelector } from '../redux/hook';
 import { getMembers } from '../redux/memberSlice';
 
 export const MemberList: React.FC = () => {
-  // const [loading, setLoading] = useState<boolean>(true);
-  // const [error, setError] = useState<boolean>(false);
-  // const [members, setMembers] = useState<IMember[]>([]);
-  // const [myId, setMyId] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
+  const [members, setMembers] = useState<IMember[]>([]);
+  const [myId, setMyId] = useState<string>('');
 
   const dispatch = useAppDispatch();
   const membersNew = useAppSelector((state) => state.member.members);
@@ -42,8 +42,8 @@ export const MemberList: React.FC = () => {
 
   useEffect(() => {
     dispatch(getMembers());
-  }, []);
-
+  }, [dispatch]);
+  
   return (
     <div>
       <MemberAccordion members={members} />

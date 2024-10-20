@@ -10,7 +10,8 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import DialogTitle from '@mui/material/DialogTitle';
 import { MemberService } from '../services/member.service';
-import { IMember, UpdateMemberButtonProps } from '../types/types';
+import {  useAppSelector } from '../redux/hook';
+import { IMember } from '../types/types';
 
 const MenuProps = {
   PaperProps: {
@@ -20,9 +21,10 @@ const MenuProps = {
   },
 };
 
-export const UpdateMemberButton: React.FC<UpdateMemberButtonProps> = ({
-  members,
-}) => {
+export const UpdateMemberButton: React.FC = () => {
+  
+  const members: IMember[] = useAppSelector((state) => state.member.members);
+
   const [open, setOpen] = useState<boolean>(false);
   const [selectedMember, setSelectedMember] = useState<IMember | null>(null);
   const [name, setName] = useState<string>('');
@@ -39,7 +41,7 @@ export const UpdateMemberButton: React.FC<UpdateMemberButtonProps> = ({
       setOpen(false);
       resetForm();
     } catch (err: any) {
-      toast.error(err.response.data.message);
+      toast.error(err.response.data.message || 'Something went wrong');
     }
   };
 
@@ -133,7 +135,12 @@ export const UpdateMemberButton: React.FC<UpdateMemberButtonProps> = ({
           />
         </DialogContent>
         <div className="flex flex-row justify-center gap-7 items-center pb-2">
-          <Button onClick={handleClickUpdate} autoFocus color="success" disabled={!selectedMember}>
+          <Button
+            onClick={handleClickUpdate}
+            autoFocus
+            color="success"
+            disabled={!selectedMember}
+          >
             Update
           </Button>
           <Button onClick={handleClose} color="error">

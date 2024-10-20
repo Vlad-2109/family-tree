@@ -14,11 +14,11 @@ export const store = configureStore({
   reducer: {
     member: memberReducer,
   },
-  middleware: (getDefaultMiddleware) => 
-    getDefaultMiddleware({thunk: false}).concat(sagaMiddleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware),
 });
 
-sagaMiddleware.run(sagas)
+sagaMiddleware.run(sagas);
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;

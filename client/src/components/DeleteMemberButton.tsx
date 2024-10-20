@@ -9,7 +9,8 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import DialogTitle from '@mui/material/DialogTitle';
 import { MemberService } from '../services/member.service';
-import { DeleteMemberButtonProps } from '../types/types';
+import { useAppSelector } from '../redux/hook';
+import { IMember } from '../types/types';
 
 const MenuProps = {
   PaperProps: {
@@ -19,9 +20,10 @@ const MenuProps = {
   },
 };
 
-export const DeleteMemberButton: React.FC<DeleteMemberButtonProps> = ({
-  members,
-}) => {
+export const DeleteMemberButton: React.FC = () => {
+
+  const members: IMember[] = useAppSelector(state => state.member.members);
+
   const [open, setOpen] = useState<boolean>(false);
   const [selectedMemberId, setSelectedMemberId] = useState<string | null>(null);
 
@@ -34,7 +36,7 @@ export const DeleteMemberButton: React.FC<DeleteMemberButtonProps> = ({
       setOpen(false);
       resetForm();
     } catch (err: any) {
-      toast.error(err.response.data.message);
+      toast.error(err.response.data.message || 'Something went wrong');
     }
   };
 
