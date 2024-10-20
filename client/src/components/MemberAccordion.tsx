@@ -1,25 +1,29 @@
 import { useEffect, useState } from 'react';
-import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Typography,
+} from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useAppSelector } from '../redux/hook';
 import { IMember } from '../types/types';
 
 export const MemberAccordion: React.FC = () => {
-
-  const members:IMember[] = useAppSelector((state) => state.member.members);
+  const members: IMember[] = useAppSelector((state) => state.member.members);
 
   const [tree, setTree] = useState<IMember | null>(null);
 
   useEffect(() => {
     if (members.length > 0) {
-      const youngestMember = members[members.length - 1]; 
+      const youngestMember = members[members.length - 1];
       setTree(buildTree(youngestMember));
     }
   }, [members]);
 
   const buildTree = (member: IMember): IMember => {
     if (!member.parents || member.parents.length === 0) {
-      return member; 
+      return member;
     }
 
     const parents = member.parents
@@ -48,5 +52,13 @@ export const MemberAccordion: React.FC = () => {
     );
   };
 
-  return <div>{tree && renderTree(tree)}</div>;
+  return (
+    <div>
+      {tree ? renderTree(tree) : (
+        <p className="text-xl text-neutral-900 font-primary font-semibold text-center">
+          No members!
+        </p>
+      )}
+    </div>
+  );
 };

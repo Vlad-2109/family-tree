@@ -10,7 +10,8 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import DialogTitle from '@mui/material/DialogTitle';
 import { MemberService } from '../services/member.service';
-import { useAppSelector } from '../redux/hook';
+import { useAppDispatch, useAppSelector } from '../redux/hook';
+import { getMembers } from '../redux/memberSlice';
 import { IMember } from '../types/types';
 
 const MenuProps = {
@@ -22,6 +23,7 @@ const MenuProps = {
 };
 
 export const AddMemberButton: React.FC = () => {
+  const dispatch = useAppDispatch();
   const members: IMember[] = useAppSelector((state) => state.member.members);
 
   const [open, setOpen] = useState<boolean>(false);
@@ -34,6 +36,7 @@ export const AddMemberButton: React.FC = () => {
     try {
       const data = await MemberService.createMember(payload);
       if (data) {
+        dispatch(getMembers());
         toast.success('Successfully created');
       }
       setOpen(false);
