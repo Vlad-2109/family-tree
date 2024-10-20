@@ -25,7 +25,7 @@ Path to file: `server/test/insomnia`
 
 Server is deployed by Render.com.
 
-Deployed host: https://family-tree-3beq.onrender.com/
+Deployed domain: https://family-tree-3beq.onrender.com/
 
 For manually running:
 
@@ -39,7 +39,7 @@ For manually running:
 
 Client is deployed be Vercel.com
 
-Deployed host: 
+Deployed domain: https://family-tree-rho-seven.vercel.app/
 
 For manually running:
 
